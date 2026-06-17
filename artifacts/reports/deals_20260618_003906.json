@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-06-18T00:39:06",
+  "meta": {
+    "model": "iPhone 13 Pro",
+    "city": "madrid",
+    "max_price": 700.0,
+    "n_listings_scanned": 109
+  },
+  "n_scored": 109,
+  "deals": [
+    {
+      "listing_id": "pj947o1wgm6e",
+      "title": "iPhone 13 Pro Max 256 GB Azul Turquesa",
+      "asking_price": 299.99,
+      "predicted_fair_price": 492.36,
+      "price_low": 322.61,
+      "price_high": 500.51,
+      "expected_margin": 0.5753,
+      "confidence": 0.2773,
+      "risk_score": 0.0,
+      "investment_score": 0.7565,
+      "decision": "STRONG BUY",
+      "risk_flags": [],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-max-256-gb-azul-turquesa-1273312013"
+    },
+    {
+      "listing_id": "mzn3qnmx8kjn",
+      "title": "iPhone 13 Pro Dorado",
+      "asking_price": 150.0,
+      "predicted_fair_price": 273.88,
+      "price_low": 221.57,
+      "price_high": 292.97,
+      "expected_margin": 0.7377,
+      "confidence": 0.4786,
+      "risk_score": 0.4,
+      "investment_score": 0.7514,
+      "decision": "STRONG BUY",
+      "risk_flags": [
+        "damaged / for parts"
+      ],
+      "city": "Illescas",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-dorado-1272535025"
+    },
+    {
+      "listing_id": "qzmm8rl5lxzv",
+      "title": "iPhone 13 Pro Max 256GB Blanco Titanio",
+      "asking_price": 299.99,
+      "predicted_fair_price": 484.4,
+      "price_low": 319.08,
+      "price_high": 501.27,
+      "expected_margin": 0.5496,
+      "confidence": 0.2478,
+      "risk_score": 0.0,
+      "investment_score": 0.7442,
+      "decision": "BUY",
+      "risk_flags": [],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-max-256gb-blanco-titanio-1273312432"
+    }
+  ]
+}

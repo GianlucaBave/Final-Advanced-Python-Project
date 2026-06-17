@@ -1,0 +1,146 @@
+{
+  "trained_at": "2026-06-18T00:36:46",
+  "n_rows": 10166,
+  "n_features": 105,
+  "split": {
+    "train": 7118,
+    "val": 1524,
+    "test": 1524
+  },
+  "price_band": [
+    50.0,
+    2500.0
+  ],
+  "models": {
+    "ridge_baseline": {
+      "val": {
+        "mae": 54.849347834038724,
+        "mape": 19.19001940361018,
+        "r2": 0.625410924262795,
+        "n": 1524
+      },
+      "test": {
+        "mae": 79.19081413088573,
+        "mape": 24.26044226701265,
+        "r2": 0.580573283886035,
+        "n": 1524
+      }
+    },
+    "xgboost": {
+      "val": {
+        "mae": 55.607545813955724,
+        "mape": 18.5783018896778,
+        "r2": 0.6211839850046763,
+        "n": 1524
+      },
+      "test": {
+        "mae": 77.88158661046945,
+        "mape": 23.464740010087183,
+        "r2": 0.5934586509112709,
+        "n": 1524
+      },
+      "best_params": null
+    },
+    "lightgbm": {
+      "val": {
+        "mae": 55.8333742793693,
+        "mape": 18.50648669333183,
+        "r2": 0.6283469842155277,
+        "n": 1524
+      },
+      "test": {
+        "mae": 72.40076424533478,
+        "mape": 22.381605965963807,
+        "r2": 0.6415843440216229,
+        "n": 1524
+      }
+    }
+  },
+  "quantile": {
+    "nominal": 0.8,
+    "empirical_coverage": 0.6864,
+    "mean_interval_width": 173.71466778905437
+  },
+  "top_features": [
+    {
+      "feature": "fam_iPhone 12 Pro Max",
+      "importance": 0.18901972472667694
+    },
+    {
+      "feature": "model_year",
+      "importance": 0.15157224237918854
+    },
+    {
+      "feature": "fam_iPhone 14 Pro Max",
+      "importance": 0.12394942343235016
+    },
+    {
+      "feature": "fam_iPhone 11",
+      "importance": 0.061714038252830505
+    },
+    {
+      "feature": "fam_iPhone 12 Pro",
+      "importance": 0.03893428295850754
+    },
+    {
+      "feature": "fam_iPhone 11 Pro Max",
+      "importance": 0.038222309201955795
+    },
+    {
+      "feature": "fam_iPhone 13",
+      "importance": 0.029724184423685074
+    },
+    {
+      "feature": "fam_iPhone 13 Pro Max",
+      "importance": 0.014135829173028469
+    },
+    {
+      "feature": "condition_label",
+      "importance": 0.012762325815856457
+    },
+    {
+      "feature": "fam_iPhone 15 Plus",
+      "importance": 0.012471754103899002
+    },
+    {
+      "feature": "is_refurbished",
+      "importance": 0.012232030741870403
+    },
+    {
+      "feature": "fam_iPhone 15",
+      "importance": 0.011971677653491497
+    },
+    {
+      "feature": "fam_iPhone 14 Plus",
+      "importance": 0.011868943460285664
+    },
+    {
+      "feature": "has_warranty",
+      "importance": 0.011840139515697956
+    },
+    {
+      "feature": "tfidf_mini",
+      "importance": 0.01027604192495346
+    },
+    {
+      "feature": "tfidf_plus",
+      "importance": 0.009754780679941177
+    },
+    {
+      "feature": "fam_iPhone 14",
+      "importance": 0.009592948481440544
+    },
+    {
+      "feature": "fam_iPhone 13 Pro",
+      "importance": 0.009453220292925835
+    },
+    {
+      "feature": "days_since_posted",
+      "importance": 0.008632548153400421
+    },
+    {
+      "feature": "tfidf_pro",
+      "importance": 0.00860131811350584
+    }
+  ]
+}

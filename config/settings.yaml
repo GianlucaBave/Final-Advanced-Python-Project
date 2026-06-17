@@ -1,0 +1,127 @@
+# ──────────────────────────────────────────────────────────────────────────
+# iphone-deal-finder — central configuration
+# Loaded once at startup by src/config.py and exposed as a typed dataclass.
+# ──────────────────────────────────────────────────────────────────────────
+
+data:
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  artifacts_dir: artifacts
+  reports_dir: artifacts/reports
+
+scraping:
+  # Spanish cities with coordinates — Wallapop search is geo-anchored.
+  cities:
+    madrid:    {lat: 40.4168, lon: -3.7038, tier: 1}
+    barcelona: {lat: 41.3874, lon: 2.1686,  tier: 1}
+    valencia:  {lat: 39.4699, lon: -0.3763, tier: 2}
+    sevilla:   {lat: 37.3891, lon: -5.9845, tier: 2}
+    bilbao:    {lat: 43.2630, lon: -2.9350, tier: 3}
+    malaga:    {lat: 36.7213, lon: -4.4214, tier: 3}
+  # iPhone models to sweep when building the training corpus.
+  models:
+    - "iPhone 11"
+    - "iPhone 11 Pro"
+    - "iPhone 11 Pro Max"
+    - "iPhone 12"
+    - "iPhone 12 mini"
+    - "iPhone 12 Pro"
+    - "iPhone 12 Pro Max"
+    - "iPhone 13"
+    - "iPhone 13 mini"
+    - "iPhone 13 Pro"
+    - "iPhone 13 Pro Max"
+    - "iPhone 14"
+    - "iPhone 14 Plus"
+    - "iPhone 14 Pro"
+    - "iPhone 14 Pro Max"
+    - "iPhone 15"
+    - "iPhone 15 Plus"
+    - "iPhone 15 Pro"
+    - "iPhone 15 Pro Max"
+    - "iPhone SE"
+  wallapop:
+    base_url: "https://api.wallapop.com/api/v3/search"
+    category_id: 24200                # Tecnología y electrónica
+    rate_limit_seconds: 1.0
+    max_retries: 3
+    backoff_base: 2.0
+    page_size: 40
+    max_pages_per_query: 3            # 3 * 40 = up to 120 per model/city
+    user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+  backmarket:
+    base_url: "https://www.backmarket.es"
+    rate_limit_seconds: 1.5
+    max_retries: 2
+  ebay:
+    # API path intentionally disabled — we scrape SOLD/COMPLETED listing HTML.
+    # .com (USD) is far less aggressively blocked than .es; we convert to EUR.
+    base_url: "https://www.ebay.com/sch/i.html"
+    home_url: "https://www.ebay.com/"
+    rate_limit_seconds: 1.0
+    max_retries: 2
+    max_pages: 5              # 5 pages * 240 ≈ 1,200 sold/model, walks back ~90 days
+    items_per_page: 240
+    fetch_retries: 8          # retry fresh warmed sessions through Akamai stubs
+    impersonate: "safari17_0" # the TLS fingerprint that gets through eBay's wall
+    usd_to_eur: 0.92          # USD→EUR conversion for label comparability
+    days_back: 90
+
+# Relative quality weights applied as sample_weight at train time when multiple
+# sources are merged. eBay sold prices are ground-truth completed sales, so they
+# dominate; Backmarket anchors edge cases; Wallapop (asking, not sold) fills
+# volume. With Wallapop-only data these collapse to a constant (no-op).
+# The product scores Spanish (Wallapop) listings, so Wallapop must DOMINATE
+# training. The US sources are auxiliary context (cross-market signal, historical
+# depth) and are down-weighted so they inform without dragging predictions toward
+# US price levels. Weights become per-row sample_weight (normalised to mean 1).
+# Train on all sources combined. Wallapop dominates (it is the deployment
+# target market); the US price data is auxiliary cross-market/historical signal.
+source_weights:
+  wallapop: 0.70
+  backmarket: 0.40
+  ebay: 0.14
+  ebay_archive: 0.06
+  ecommerce_us: 0.10
+
+model:
+  test_fraction: 0.15
+  val_fraction: 0.15
+  random_state: 42
+  xgboost:
+    n_estimators: 500
+    max_depth: 6
+    learning_rate: 0.05
+    subsample: 0.9
+    colsample_bytree: 0.9
+    min_child_weight: 3
+    reg_alpha: 0.1
+  # Grid for GridSearchCV (kept small so the 6-hour plan holds; expand freely).
+  grid:
+    n_estimators: [300, 500]
+    max_depth: [4, 6]
+    learning_rate: [0.03, 0.05, 0.1]
+  quantile:
+    low_alpha: 0.1
+    high_alpha: 0.9
+
+features:
+  tfidf_max_features: 50
+  target_encoding_min_count: 20
+
+scoring:
+  margin_weight: 0.5
+  confidence_weight: 0.3
+  risk_weight: 0.2
+  wallapop_fee_pct: 0.03
+  wallapop_fee_flat: 5.0
+  confidence_interval_full_width: 0.5   # interval width at which confidence hits 0
+  thresholds:
+    strong_buy: 0.75
+    buy: 0.55
+    hold: 0.35
+
+logging:
+  console_level: INFO
+  file_level: DEBUG

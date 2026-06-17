@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-06-17T23:24:32",
+  "meta": {
+    "model": "iPhone 13 Pro",
+    "city": "madrid",
+    "max_price": 700.0,
+    "n_listings_scanned": 110
+  },
+  "n_scored": 110,
+  "deals": [
+    {
+      "listing_id": "xzogqn9pd2j9",
+      "title": "iPhone 13 Pro |TIENDA |GARANTIA",
+      "asking_price": 299.0,
+      "predicted_fair_price": 408.91,
+      "price_low": 300.3,
+      "price_high": 403.49,
+      "expected_margin": 0.3098,
+      "confidence": 0.4952,
+      "risk_score": 0.0,
+      "investment_score": 0.761,
+      "decision": "STRONG BUY",
+      "risk_flags": [],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-tienda-garantia-1272952757"
+    },
+    {
+      "listing_id": "qzmm8rl5lxzv",
+      "title": "iPhone 13 Pro Max 256GB Blanco Titanio",
+      "asking_price": 299.99,
+      "predicted_fair_price": 568.78,
+      "price_low": 347.43,
+      "price_high": 595.81,
+      "expected_margin": 0.8224,
+      "confidence": 0.1266,
+      "risk_score": 0.0,
+      "investment_score": 0.7299,
+      "decision": "BUY",
+      "risk_flags": [],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-max-256gb-blanco-titanio-1273312432"
+    },
+    {
+      "listing_id": "wzvg81mo37zl",
+      "title": "iPhone 13 Pro Max 256 GB Negro Grafito",
+      "asking_price": 299.99,
+      "predicted_fair_price": 522.5,
+      "price_low": 351.82,
+      "price_high": 575.36,
+      "expected_margin": 0.6728,
+      "confidence": 0.1444,
+      "risk_score": 0.0,
+      "investment_score": 0.7266,
+      "decision": "BUY",
+      "risk_flags": [],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-max-256-gb-negro-grafito-1273312217"
+    },
+    {
+      "listing_id": "pj947o1wgm6e",
+      "title": "iPhone 13 Pro Max 256 GB Azul Turquesa",
+      "asking_price": 299.99,
+      "predicted_fair_price": 545.54,
+      "price_low": 348.83,
+      "price_high": 591.62,
+      "expected_margin": 0.7473,
+      "confidence": 0.1099,
+      "risk_score": 0.0,
+      "investment_score": 0.7213,
+      "decision": "BUY",
+      "risk_flags": [],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-max-256-gb-azul-turquesa-1273312013"
+    },
+    {
+      "listing_id": "qjwr8kwrp46o",
+      "title": "iPhone 13 Pro 128GB Plata",
+      "asking_price": 350.0,
+      "predicted_fair_price": 416.54,
+      "price_low": 324.47,
+      "price_high": 428.1,
+      "expected_margin": 0.1401,
+      "confidence": 0.5024,
+      "risk_score": 0.15,
+      "investment_score": 0.6549,
+      "decision": "BUY",
+      "risk_flags": [
+        "suspicious wording"
+      ],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-128gb-plata-1273263077"
+    },
+    {
+      "listing_id": "xzogq57085j9",
+      "title": "iPhone 13 Pro Max",
+      "asking_price": 250.0,
+      "predicted_fair_price": 384.13,
+      "price_low": 247.88,
+      "price_high": 522.5,
+      "expected_margin": 0.4704,
+      "confidence": 0.0,
+      "risk_score": 0.1,
+      "investment_score": 0.6365,
+      "decision": "BUY",
+      "risk_flags": [
+        "no battery info"
+      ],
+      "city": "Madrid",
+      "url": "https://es.wallapop.com/item/iphone-13-pro-max-1273155333"
+    }
+  ]
+}

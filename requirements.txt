@@ -1,0 +1,28 @@
+# --- core data / ML ---
+numpy>=1.26
+pandas>=2.1
+pyarrow>=14.0          # parquet I/O (S2 performance)
+scikit-learn>=1.4
+xgboost>=2.0           # quantile objective requires 2.0+
+lightgbm>=4.1
+shap>=0.44             # feature attribution (S7)
+
+# --- scraping (S5) ---
+requests>=2.31
+curl_cffi>=0.7          # TLS (JA3) impersonation to pass eBay's Akamai bot wall
+beautifulsoup4>=4.12
+lxml>=5.0
+
+# --- reporting / viz (S3) ---
+matplotlib>=3.8
+seaborn>=0.13
+
+# --- config / utils ---
+PyYAML>=6.0
+rapidfuzz>=3.6         # optional; code falls back to stdlib difflib if absent
+
+# --- slides ---
+python-pptx>=0.6.23
+
+# --- tests ---
+pytest>=8.0

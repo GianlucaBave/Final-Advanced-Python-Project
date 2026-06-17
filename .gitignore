@@ -1,0 +1,23 @@
+# python junk
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# os
+.DS_Store
+
+# secrets
+.env
+
+# runtime logs (regenerated each run)
+logs/
+
+# local backup duplicate (kept out of the repo)
+data/ebay_sold_es_backup.parquet
+
+# NOTE: data/ and artifacts/ ARE committed for this submission so the project
+# is complete and reproducible (datasets, trained model, plots, report JSON).
