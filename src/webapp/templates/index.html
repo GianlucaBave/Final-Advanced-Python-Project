@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone Deal-Finder</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #fbfbfd;
+    --card: #ffffff;
+    --ink: #1d1d1f;
+    --ink-soft: #515154;
+    --muted: #86868b;
+    --line: #d2d2d7;
+    --accent: #0071e3;
+    --success: #34c759;
+    --warn: #ff9500;
+    --danger: #ff3b30;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 24px 96px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin: 0 0 12px;
+  }
+  .subtitle {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-family: inherit;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg-soft);
+    color: var(--ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+  }
+  input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+  }
+  button {
+    padding: 16px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.05s;
+  }
+  button:hover { background: #2c2c2e; }
+  button:active { transform: scale(0.99); }
+  .hint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .error {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(255, 59, 48, 0.08);
+    border-left: 3px solid var(--danger);
+    border-radius: 8px;
+    color: #b1241c;
+    font-size: 14px;
+  }
+  .result {
+    margin-top: 48px;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .result-header {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .result-photo {
+    width: 88px;
+    height: 88px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: var(--bg-soft);
+    flex-shrink: 0;
+  }
+  .result-photo.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 28px;
+  }
+  .result-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+  .result-city {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .verdict {
+    padding: 28px 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .verdict-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .verdict-decision {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .verdict-decision.strong-buy { color: var(--success); }
+  .verdict-decision.buy { color: var(--accent); }
+  .verdict-decision.hold { color: var(--muted); }
+  .verdict-decision.skip { color: var(--danger); }
+  .verdict-score {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+  .verdict-score strong { color: var(--ink); }
+  .price-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .price-cell {
+    padding: 24px 32px;
+    text-align: center;
+  }
+  .price-cell + .price-cell {
+    border-left: 1px solid var(--line);
+  }
+  .price-label {
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .price-value {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .price-range {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .margin {
+    font-size: 13px;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .margin.pos { color: var(--success); }
+  .margin.neg { color: var(--danger); }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--line);
+  }
+  .metric-cell {
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .metric-cell + .metric-cell {
+    border-left: 1px solid var(--line);
+  }
+  .metric-label {
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .metric-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .flags {
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .flags-title {
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .flag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(255, 149, 0, 0.12);
+    color: #b86a00;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 6px 6px 0;
+  }
+  .none {
+    color: var(--success);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .listing-link {
+    display: block;
+    padding: 18px 32px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .listing-link:hover {
+    background: var(--bg-soft);
+  }
+  footer {
+    text-align: center;
+    margin-top: 64px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 540px) {
+    h1 { font-size: 32px; }
+    .container { padding: 56px 16px 64px; }
+    .result-header { padding: 22px 22px 20px; gap: 14px; }
+    .verdict { padding: 22px; }
+    .verdict-decision { font-size: 30px; }
+    .price-cell, .metric-cell, .flags, .listing-link { padding-left: 22px; padding-right: 22px; }
+    .price-value { font-size: 24px; }
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .metric-cell:nth-child(3) {
+      grid-column: span 2;
+      border-left: none;
+      border-top: 1px solid var(--line);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="eyebrow">iPhone Deal-Finder</div>
+  <h1>Is it a deal?</h1>
+  <p class="subtitle">Paste any Wallapop iPhone listing URL — we'll tell you what it's really worth.</p>
+</header>
+
+<form method="POST" action="/analyze" autocomplete="off">
+  <input
+    type="text"
+    name="url"
+    placeholder="https://es.wallapop.com/item/iphone-..."
+    value="{{ url or '' }}"
+    spellcheck="false"
+    required
+  >
+  <button type="submit">Analyze listing</button>
+  <p class="hint">Powered by an XGBoost model trained on 13,745 real iPhone price records.</p>
+</form>
+
+{% if error %}
+  <div class="error">{{ error }}</div>
+{% endif %}
+
+{% if result %}
+<div class="result">
+
+  <div class="result-header">
+    {% if result.image_url %}
+      <img class="result-photo" src="{{ result.image_url }}" alt="">
+    {% else %}
+      <div class="result-photo placeholder">📱</div>
+    {% endif %}
+    <div>
+      <h2 class="result-title">{{ result.title }}</h2>
+      <div class="result-city">{{ result.city }}</div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-label">Decision</div>
+    <p class="verdict-decision {{ result.decision_class }}">{{ result.decision }}</p>
+    <div class="verdict-score">
+      Investment score <strong>{{ result.score }}</strong>
+    </div>
+  </div>
+
+  <div class="price-row">
+    <div class="price-cell">
+      <div class="price-label">Asking price</div>
+      <div class="price-value">{{ result.asking_price }}</div>
+    </div>
+    <div class="price-cell">
+      <div class="price-label">Predicted fair price</div>
+      <div class="price-value">{{ result.fair_price }}</div>
+      <div class="price-range">range {{ result.low }} – {{ result.high }}</div>
+      <div class="margin {{ 'pos' if result.margin_value > 0 else 'neg' }}">
+        {{ result.margin_pct }} margin
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric-cell">
+      <div class="metric-label">Margin</div>
+      <div class="metric-value">{{ result.margin_pct }}</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-label">Confidence</div>
+      <div class="metric-value">{{ result.confidence }}</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-label">Risk</div>
+      <div class="metric-value">{{ result.risk }}</div>
+    </div>
+  </div>
+
+  <div class="flags">
+    <div class="flags-title">Risk flags</div>
+    {% if result.risk_flags %}
+      {% for flag in result.risk_flags %}
+        <span class="flag">{{ flag }}</span>
+      {% endfor %}
+    {% else %}
+      <span class="none">None — clean listing</span>
+    {% endif %}
+  </div>
+
+  {% if result.url %}
+    <a class="listing-link" href="{{ result.url }}" target="_blank" rel="noopener">View on Wallapop →</a>
+  {% endif %}
+
+</div>
+{% endif %}
+
+<footer>
+  Advanced Python · ESADE · Final Project
+  · <a href="https://github.com/GianlucaBave/Final-Advanced-Python-Project" target="_blank" rel="noopener">GitHub</a>
+</footer>
+
+</div>
+
+</body>
+</html>

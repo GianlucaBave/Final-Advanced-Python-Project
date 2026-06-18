@@ -21,6 +21,9 @@ seaborn>=0.13
 PyYAML>=6.0
 rapidfuzz>=3.6         # optional; code falls back to stdlib difflib if absent
 
+# --- webapp (live demo) ---
+Flask>=3.0
+
 # --- slides ---
 python-pptx>=0.6.23
 
