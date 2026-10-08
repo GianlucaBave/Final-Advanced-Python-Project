@@ -1,6 +1,6 @@
 # iPhone Deal-Finder — Technical Report
 
-**Course:** Advanced Python · ESADE — Final Project
+**Course:** Advanced Python, Final Project
 **System:** an end-to-end machine-learning pipeline that collects second-hand
 iPhone listings, predicts each phone's fair market value, quantifies the
 uncertainty of that prediction, and converts it into an actionable

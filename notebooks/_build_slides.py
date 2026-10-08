@@ -104,7 +104,7 @@ tf = textbox(s, Inches(0.9), Inches(2.2), Inches(11.5), Inches(2.5))
 _txt(tf, [
     ("iPhone Deal-Finder", 46, True, WHITE),
     ("Predicting fair value & spotting under-priced iPhones on Wallapop — live", 20, False, ACCENT),
-    ("Advanced Python · ESADE   |   13,745 listings · 4 real data sources", 15, False, GREY),
+    ("Advanced Python   |   13,745 listings · 4 real data sources", 15, False, GREY),
 ], space_after=10)
 chip = box(s, Inches(0.9), Inches(5.3), Inches(4.2), Inches(0.6), fill=GREEN)
 ctf = chip.text_frame; ctf.word_wrap = True

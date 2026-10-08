@@ -191,7 +191,7 @@ text(s, Inches(0.8), Inches(2.2), Inches(8.3), Inches(3), [
     ("Machine learning that predicts an iPhone's fair value and", 20, False, SUB, BODY),
     ("spots underpriced listings, on live data, in seconds.", 20, False, SUB, BODY),
 ], sp=8)
-pill(s, Inches(0.85), Inches(5.45), Inches(4.6), "Advanced Python · ESADE · Final Project", BLUE)
+pill(s, Inches(0.85), Inches(5.45), Inches(4.6), "Advanced Python · Final Project", BLUE)
 text(s, Inches(0.85), Inches(6.2), Inches(8), Inches(0.6),
      [("Regression  ·  Web scraping  ·  XGBoost  ·  13,745 real listings", 14, False, SUB, MONO)], sp=0)
 
