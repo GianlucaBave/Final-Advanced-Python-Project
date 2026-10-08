@@ -4,7 +4,7 @@
 > Wallapop, computes an **investment score**, and outputs a **buy / hold / skip**
 > decision with the reasoning behind it — on **live data**, in seconds.
 
-Advanced Python final project · ESADE. Built end-to-end on **13,745 real iPhone
+Advanced Python final project. Built end-to-end on **13,745 real iPhone
 price records** from **4 sources** — 8,262 scraped live from Wallapop Spain, plus
 eBay and two US resale datasets.
 
